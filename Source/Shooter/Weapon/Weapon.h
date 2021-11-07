@@ -27,6 +27,7 @@ public:
 		void AddAmmo(int _AmmoAmount);
 
 protected:
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
@@ -41,14 +42,14 @@ private:
 	UPROPERTY(EditAnywhere)
 		UParticleSystem* MuzzleFlash;
 
-	UPROPERTY(EditAnywhere)
-		USoundBase* MuzzleSoundEffect;
+	//UPROPERTY(EditAnywhere)
+	//	USoundBase* MuzzleSoundEffect;
 
-	UPROPERTY(EditAnywhere)
-		USoundBase* MuzzleEmptyEffect;
+	//UPROPERTY(EditAnywhere)
+	//	USoundBase* MuzzleEmptyEffect;
 
-	UPROPERTY(EditAnywhere)
-		USoundBase* Impact;
+	//UPROPERTY(EditAnywhere)
+	//	USoundBase* Impact;
 
 	UPROPERTY(EditAnywhere)
 		UParticleSystem* ImpactEffect;

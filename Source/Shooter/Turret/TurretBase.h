@@ -33,5 +33,4 @@ protected:
 
 	void RotateTurretFunction(FVector LookAtTarget);
 
-
 };

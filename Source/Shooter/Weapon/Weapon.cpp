@@ -43,7 +43,7 @@ void AWeapon::PullTrigger()
 	if (Ammo <= 0)
 	{
 		// Spawns Empty sound for weapon
-		UGameplayStatics::SpawnSoundAttached(MuzzleEmptyEffect, Mesh, TEXT("MuzzleFlashSocket"));
+		//UGameplayStatics::SpawnSoundAttached(MuzzleEmptyEffect, Mesh, TEXT("MuzzleFlashSocket"));
 	}
 	else
 	{
@@ -57,7 +57,7 @@ void AWeapon::PullTrigger()
 		UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("MuzzleFlashSocket"));
 
 		// Sets the sound attached to the weapon
-		UGameplayStatics::SpawnSoundAttached(MuzzleSoundEffect, Mesh, TEXT("MuzzleFlashSocket"));
+		//UGameplayStatics::SpawnSoundAttached(MuzzleSoundEffect, Mesh, TEXT("MuzzleFlashSocket"));
 
 		if (bSuccess)
 		{
@@ -65,7 +65,7 @@ void AWeapon::PullTrigger()
 			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.Location, ShotDirection.Rotation());
 
 			// Spawns Impact sound at Location
-			UGameplayStatics::PlaySoundAtLocation(GetWorld(), Impact, Hit.Location);
+			//UGameplayStatics::PlaySoundAtLocation(GetWorld(), Impact, Hit.Location);
 
 			// Applies emitter and damage
 			AActor* HitActor = Hit.GetActor();

@@ -4,7 +4,6 @@
 #include "TurretBase.h"
 #include <Components/CapsuleComponent.h>
 
-
 // Sets default values
 ATurretBase::ATurretBase()
 {
@@ -35,4 +34,3 @@ void ATurretBase::RotateTurretFunction(FVector LookAtTarget)
 	Turret->SetWorldRotation(TurretRotation);
 
 }
-
