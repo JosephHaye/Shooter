@@ -42,6 +42,9 @@ public:
 
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 
+	UPROPERTY(BlueprintReadOnly)
+	bool IsPrimaryWeaponSelected = true;
+
 protected:
 
 	// Called when the game starts or when spawned
@@ -54,7 +57,10 @@ private:
 	void LookUpRate(float AxisValue);
 	void LookRightRate(float AxisValue);
 	void Shoot();
-	void FinishAnim();
+	void Rifle();
+	void GrenadeLauncher();
+
+
 
 	UPROPERTY(EditAnywhere)
 		float RotationRate = 10;
@@ -67,6 +73,9 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 		TSubclassOf<AWeapon> WeaponClass;
+
+	//UPROPERTY(EditDefaultsOnly)
+	//	TArray<TSubclassOf<AWeapon>> Guns;
 
 	UPROPERTY()
 		AWeapon* Weapon;

@@ -4,41 +4,34 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Weapon.generated.h"
+#include "MachineGun.generated.h"
 
 UCLASS()
-class SHOOTER_API AWeapon : public AActor
+class SHOOTER_API AMachineGun : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AWeapon();
+	AMachineGun();
 
-	void PullTrigger();
-
-	UFUNCTION(BlueprintPure)
-		float GetAmmo() const;
+	void Shoot();
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	UFUNCTION(BlueprintCallable, Category = "Ammo")
-		void AddAmmo(int _AmmoAmount);
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		USceneComponent* Root;
-
-	UPROPERTY(VisibleAnywhere)
-		USkeletalMeshComponent* Mesh;
 
 protected:
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+private:	
 
-private:
+	UPROPERTY(VisibleAnywhere)
+		USceneComponent* Root;
+
+	UPROPERTY(VisibleAnywhere)
+		USkeletalMeshComponent* Mesh;
 
 	UPROPERTY(EditAnywhere)
 		UParticleSystem* MuzzleFlash;
@@ -61,13 +54,7 @@ private:
 	UPROPERTY(EditAnywhere)
 		float Damage = 10;
 
-	UPROPERTY(EditDefaultsOnly)
-		int MaxAmmo = 100;
-
-	UPROPERTY(VisibleAnywhere)
-		int Ammo;
-
-	bool WeaponTraceCode(FHitResult& Hit, FVector& ShotDirection);
+	bool TurretTraceCode(FHitResult& Hit, FVector& ShotDirection);
 
 	AController* GetOwnerController() const;
 };

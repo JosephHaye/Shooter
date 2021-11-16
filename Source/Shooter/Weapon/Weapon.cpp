@@ -21,7 +21,7 @@ AWeapon::AWeapon()
 	Mesh->SetupAttachment(Root);
 }
 
-// Called when the game starts or when spawned
+// Called when the game starts
 float AWeapon::GetAmmo() const
 {
 	return (float)Ammo / MaxAmmo;

@@ -22,12 +22,18 @@ void ACharacterBelica::BeginPlay()
 	// Sets Health as MaxHealth
 	Health = MaxHealth;
 
-	// Spawns Weapon
-	Weapon = GetWorld()->SpawnActor<AWeapon>(WeaponClass);
-	GetMesh()->HideBoneByName(TEXT("weapon"), EPhysBodyOp::PBO_None);
-	Weapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("weaponSocket"));
-	Weapon->SetOwner(this);
-	
+	//for (TSubclassOf<AWeapon> Gunzz : Guns)
+	//{
+		//int i = 0;
+		//Weapon = GetWorld()->SpawnActor<AWeapon>(Guns[i]);
+		//Spawns Weapon
+		Weapon = GetWorld()->SpawnActor<AWeapon>(WeaponClass);
+		GetMesh()->HideBoneByName(TEXT("weapon"), EPhysBodyOp::PBO_None);
+		Weapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("weaponSocket"));
+		Weapon->SetOwner(this);
+		//i++;
+	/*}*/
+
 }
 
 // Calls IsDead Animation
@@ -50,7 +56,7 @@ float ACharacterBelica::GetAmmoPercentage() const
 // Adds Health
 void ACharacterBelica::Heal(float _HealAmount)
 {
-	UE_LOG(LogTemp, Warning, TEXT("We are healing for %f points."), _HealAmount);
+	UE_LOG(LogTemp, Warning, TEXT("You are healing for %f points."), _HealAmount);
 	Health += _HealAmount;
 
 	if (Health > 100)
@@ -107,6 +113,9 @@ void ACharacterBelica::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 	// Allows the player to Shoot
 	PlayerInputComponent->BindAction(TEXT("Shoot"), EInputEvent::IE_Pressed, this, &ACharacterBelica::Shoot);
+
+	//PlayerInputComponent->BindAction(TEXT("Rifle"), EInputEvent::IE_Pressed, this, &ACharacterBelica::Rifle);
+	//PlayerInputComponent->BindAction(TEXT("GrenadeLauncher"), EInputEvent::IE_Pressed, this, &ACharacterBelica::GrenadeLauncher);
 }
 
 // Applies damage
@@ -161,3 +170,13 @@ void ACharacterBelica::Shoot()
 {
 	Weapon->PullTrigger();
 }
+
+//void ACharacterBelica::Rifle()
+//{
+//	IsPrimaryWeaponSelected = true;
+//}
+//
+//void ACharacterBelica::GrenadeLauncher()
+//{
+//	IsPrimaryWeaponSelected = false;
+//}
