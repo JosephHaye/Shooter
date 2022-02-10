@@ -26,13 +26,24 @@ public:
 	UFUNCTION(BlueprintPure)
 		float GetAmmoPercentage() const;
 
-	UFUNCTION(BlueprintCallable, Category = "Health")
-		void Heal(float _HealAmount);
+	//------------------------- Debug code ------------------------//
 
-	UFUNCTION(BlueprintCallable, Category = "Ammo")
-		void AddAmmo(int _AmmoAmount);
+	//UFUNCTION(BlueprintCallable, Category = "Health")
+	//	void Heal(float _HealAmount);
+
+	//UFUNCTION(BlueprintCallable, Category = "Damage")
+	//	void Damage(int _DamageAmount);
+
+	//UFUNCTION(BlueprintCallable, Category = "Ammo")
+	//	void AddAmmo(int _AmmoAmount);
 
 	//void StartHealing();
+	//
+	//void StartDamage();
+
+	//void GetAmmo();
+
+	//--------------------------------------------------------//
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -59,6 +70,8 @@ private:
 	void Shoot();
 	void Rifle();
 	void GrenadeLauncher();
+	void Sprint();
+	void NotSprinting();
 
 
 

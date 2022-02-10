@@ -4,6 +4,7 @@
 #include "CharacterBelica.h"
 #include "Shooter/Weapon/Weapon.h"
 #include "Shooter/ShooterGameMode.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Components/CapsuleComponent.h"
 
 // Sets default values
@@ -53,31 +54,60 @@ float ACharacterBelica::GetAmmoPercentage() const
 	return Weapon->GetAmmo();
 }
 
-// Adds Health
-void ACharacterBelica::Heal(float _HealAmount)
-{
-	UE_LOG(LogTemp, Warning, TEXT("You are healing for %f points."), _HealAmount);
-	Health += _HealAmount;
+//------------------------------------ Debug code section ------------------------------------------------------//
 
-	if (Health > 100)
-	{
-		Health = 100;
-	}
-}
+//// Debug to add Health
+//void ACharacterBelica::Heal(float _HealAmount)
+//{
+//	UE_LOG(LogTemp, Warning, TEXT("You are healing for %f points."), _HealAmount);
+//	Health += _HealAmount;
+//
+//	if (Health > 100)
+//	{
+//		Health = 100;
+//	}
+//}
 
-// Adds Ammo 
-void ACharacterBelica::AddAmmo(int _AmmoAmount)
-{
-	Weapon->AddAmmo(_AmmoAmount);
+//// Debug to take damage
+//void ACharacterBelica::Damage(int _DamageAmount)
+//{
+//	UE_LOG(LogTemp, Warning, TEXT("You are taking damage for %f points."), _DamageAmount);
+//	Health -= _DamageAmount;
+//
+//	if (Health < 0)
+//	{
+//		Health = 0;
+//	}
+//}
 
-	UE_LOG(LogTemp, Warning, TEXT("You have gained %f Ammo."), _AmmoAmount);
-}
+//// Debug to add Ammo 
+//void ACharacterBelica::AddAmmo(int _AmmoAmount)
+//{
+//	Weapon->AddAmmo(_AmmoAmount);
+//
+//	UE_LOG(LogTemp, Warning, TEXT("You have gained %f Ammo."), _AmmoAmount);
+//}
+//
 
-// Debug to check if healing works
+//// Debug to check if healing works
 //void ACharacterBelica::StartHealing()
 //{
-//	Heal(0.02f);
+//	Heal(10);
 //}
+
+////Debug to check if taking damage works
+//void ACharacterBelica::StartDamage()
+//{
+//	Damage(10);
+//}
+
+//// Debug to check if adding ammo works
+//void ACharacterBelica::GetAmmo()
+//{
+//	AddAmmo(10);
+//}
+
+//-------------------------------------------------------------------------------------------------//
 
 // Called every frame
 void ACharacterBelica::Tick(float DeltaTime)
@@ -108,14 +138,20 @@ void ACharacterBelica::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	// Allows the player to Jump
 	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &ACharacter::Jump);
 
-	// Allows for player to heal using a button press
+	// Allows usage of debug code
 	//PlayerInputComponent->BindAction(TEXT("Heal"), IE_Pressed, this, &ACharacterBelica::StartHealing);
+	//PlayerInputComponent->BindAction(TEXT("AddAmmo"), IE_Pressed, this, &ACharacterBelica::GetAmmo);
+	//PlayerInputComponent->BindAction(TEXT("Damage"), IE_Pressed, this, &ACharacterBelica::StartDamage);
 
 	// Allows the player to Shoot
 	PlayerInputComponent->BindAction(TEXT("Shoot"), EInputEvent::IE_Pressed, this, &ACharacterBelica::Shoot);
 
 	//PlayerInputComponent->BindAction(TEXT("Rifle"), EInputEvent::IE_Pressed, this, &ACharacterBelica::Rifle);
 	//PlayerInputComponent->BindAction(TEXT("GrenadeLauncher"), EInputEvent::IE_Pressed, this, &ACharacterBelica::GrenadeLauncher);
+
+	// Allows player to begin and stop sprinting
+	PlayerInputComponent->BindAction(TEXT("Sprint"), EInputEvent::IE_Pressed, this, &ACharacterBelica::Sprint);
+	PlayerInputComponent->BindAction(TEXT("Sprint"), EInputEvent::IE_Released, this, &ACharacterBelica::NotSprinting);
 }
 
 // Applies damage
@@ -169,6 +205,18 @@ void ACharacterBelica::LookRightRate(float AxisValue)
 void ACharacterBelica::Shoot()
 {
 	Weapon->PullTrigger();
+}
+
+void ACharacterBelica::Sprint()
+{
+	UE_LOG(LogTemp, Warning, TEXT("We are sprinting"));
+	GetCharacterMovement()->MaxWalkSpeed = 1500.0f;
+}
+
+void ACharacterBelica::NotSprinting()
+{
+	UE_LOG(LogTemp, Warning, TEXT("We have stopped sprinting"));
+	GetCharacterMovement()->MaxWalkSpeed = 600.0f;
 }
 
 //void ACharacterBelica::Rifle()
